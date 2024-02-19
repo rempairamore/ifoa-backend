@@ -1,0 +1,10 @@
+h1 {
+    color: rgb(43, 40, 40);
+}
+
+img, svg {
+    display: block; /* Sovrascrive qualsiasi altro display */
+    margin: auto; /* Centra l'immagine orizzontalmente */
+    width: 600px; /* Larghezza fissa */
+    height: auto; /* Mantiene l'aspetto dell'immagine */
+  }

@@ -1,3 +1,10 @@
 h1 {
     color: rgb(43, 40, 40);
 }
+
+
+#loadingSpinner {
+    position: fixed; 
+    top: 10%;
+    left: 50%;
+  }
