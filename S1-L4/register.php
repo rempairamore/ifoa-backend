@@ -1,9 +1,9 @@
-<?php require_once ("header.php"); ?>
+<?php require_once ("header.php"); require_once ("navbar.php"); ?>
 
 <form method="POST" class="row g-3 needs-validation m-3" action="gestione.php" enctype="multipart/form-data"
         novalidate>
         <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">First name</label>
+            <label for="validationCustom01" class="form-label">Full name</label>
             <input type="text" class="form-control" name="firstname" placeholder="Joe" required>
             <div class="valid-feedback">
                 Looks good!

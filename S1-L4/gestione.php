@@ -2,6 +2,45 @@
 
 require_once ("config.php");
 
+
+// var_dump($_REQUEST);
+// exit;
+
+
+if($_REQUEST["mode"] === 'login') {
+    // Funzione per verificare le credenziali
+    $my_db->query("USE db_1");
+    $sql_query = 'SELECT * FROM utenti WHERE username ="' . $_REQUEST['username'] . '"';
+    $result_user = $my_db->query($sql_query);
+
+    $utente = mysqltoarray($result_user);
+
+    if(isset($utente[0])) {
+        // echo "user esiste";
+        if(password_verify($_REQUEST['password'], $utente[0]['pwd'])) {
+            // echo 'tutto ok';
+            session_start();
+            $_SESSION["username"] = $_REQUEST['username'];
+            $_SESSION['login'] = 'true';
+            $_SESSION["user_id"] = $utente[0]['id'];
+
+            session_write_close();
+            exit(header('Location: index.php'));
+
+
+        } else {
+            // echo "password no buona";
+            exit(header('Location: login.php?errore=pwd'));
+            
+        }
+    } else {
+        // echo "user non esiste";
+        exit(header('Location: login.php?error=user'));
+    };
+    
+    
+}
+
 // upload file PHP
    if($_FILES['fotoFile']['type'] === 'image/jpeg' || $_FILES['fotoFile']['type'] === 'image/png') {
     //    print_r($_FILES['fotoFile']);
@@ -82,18 +121,6 @@ if (validatePassword($password)) {
 };
 
 
-$my_db = new mysqli(
-    $config['mysql_host'],
-    $config['mysql_user'],
-    $config['mysql_password']
-);
-
-if($my_db->connect_error) { 
-    die($my_db->connect_error);
-} else {
-    // var_dump($my_db);
-}
-
 
 // tutta dir per DB 
 $dir_per_db = "http://ifoa-backend.com/S1-L4/" . $tutta_dir;
@@ -107,7 +134,7 @@ $insert_user = "
     INSERT INTO utenti (name, email, pwd, username, pictures) VALUES (
         '" . $_POST['firstname'] . "',
         '" . $_POST['mail'] . "',
-        '" . $_POST['password'] . "',
+        '" . password_hash($_POST['password'], PASSWORD_DEFAULT) . "',
         '" . $_POST['username'] . "',
         '" . $dir_per_db . "'
     )
@@ -116,3 +143,4 @@ $insert_user = "
 $my_db->query($insert_user);
 
 exit(header('Location: index.php'));
+
