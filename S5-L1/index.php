@@ -1,3 +1,4 @@
+<?php require_once 'config.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +9,31 @@
 </head>
 <body>
     <h1>Benvenuti</h1>
-    <form class="row g-3">
+    <form class="row g-3" method="POST" action="controller.php">
   <div class="col-md-6">
     <label for="inputnome" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="inputnome">
+    <input type="text" class="form-control" id="inputnome" name="nome">
   </div>
   <div class="col-md-6">
     <label for="inputcognome" class="form-label">Cognome</label>
-    <input type="text" class="form-control" id="inputcognome">
+    <input type="text" class="form-control" id="inputcognome" name="cognome">
   </div>
   <div class="col-md-6">
     <label for="inputCity" class="form-label">City</label>
-    <input type="text" class="form-control" id="inputCity">
+    <input type="text" class="form-control" id="inputCity" name="city">
   </div>
- 
-  
-  
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Invia dati al DB</button>
   </div>
 </form>
+
+<div class="col-12 mt-5">
+    <button type="submit" onclick="window.location.href='index_csv.php'" class="btn btn-primary">Esporta dati in csv</button>
+  </div>
+
+<?php if ($_GET['add'] === 'success') {
+    print '<h3>Dati inviati con successo</h3>';
+} ?>
 
 
 
