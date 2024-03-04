@@ -27,6 +27,8 @@ if($resource) {
     fclose($resource);
 }
 
+
+$mysqli ->query('DELETE FROM userscsv');
 $resource = fopen($dir.$file, 'r');
 while($data = fgetcsv($resource)) {
   var_dump($data);
@@ -37,6 +39,6 @@ while($data = fgetcsv($resource)) {
 }
 fclose($resource);  
 
+header("Location: index.php?csv=success", true, 301);
+exit;
 
-
-?>

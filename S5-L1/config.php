@@ -2,8 +2,8 @@
 
     $config = [
         'mysql_host' => 'localhost',
-        'mysql_user' => 'root',
-        'mysql_password' => ''
+        'mysql_user' => 'php_user',
+        'mysql_password' => 'password'
     ];
 
     $mysqli = new mysqli(
@@ -12,10 +12,10 @@
         $config['mysql_password']);
     if($mysqli->connect_error) { die($mysqli->connect_error); } 
 
-    $sql = 'CREATE DATABASE IF NOT EXISTS user;';
+    $sql = 'CREATE DATABASE IF NOT EXISTS S5L1;';
     if(!$mysqli->query($sql)) { die($mysqli->connect_error); } // Creo il mio DB
  
-    $sql= 'USE user;';
+    $sql= 'USE S5L1;';
     $mysqli ->query($sql);
     // Creo la tabella
     $sqltable = 'CREATE TABLE IF NOT EXISTS users ( 
