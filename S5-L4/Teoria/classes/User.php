@@ -18,7 +18,7 @@ namespace User {
 
 
     class Guest extends User {
-        public $name;
+        private $name;
 
 
         //Implementiamo il costruttore

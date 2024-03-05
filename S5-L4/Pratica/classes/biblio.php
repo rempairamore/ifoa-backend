@@ -28,7 +28,7 @@ namespace Biblioteca {
     class Libro extends MaterialeBibliotecario {
      
         private $autore;
-        private $contaLibri = 0;
+        static $contaLibri = 0;
 
         function __construct($titolo, $annoPubblicazione, $autore) {
             parent::__construct($titolo,$annoPubblicazione);
@@ -38,11 +38,15 @@ namespace Biblioteca {
 
         function presta() {
             echo "libro prestato";
+            self::$contaLibri--;
+            parent::$contatoreMateriali--;
 
         }
 
         function restituisci() {
             echo "libro restituito";
+            self::$contaLibri++;
+            parent::$contatoreMateriali++;
 
         }
 
@@ -66,12 +70,15 @@ namespace Biblioteca {
         function presta() {
             echo "DVD prestato";
             parent::$contatoreMateriali--;
+            self::$contaDvd--;
+            
 
         }
     
         function restituisci() {
             echo "DVD restituito";
             parent::$contatoreMateriali++;
+            self::$contaDvd++;
     
         } 
 

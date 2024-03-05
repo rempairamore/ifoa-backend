@@ -53,45 +53,60 @@
     <?php
     require_once "classes/biblio.php";
     use Biblioteca\Dvd as Film;
-    use Biblioteca\Dvd;
+    use Biblioteca\Libro as Book;
 
     $dvd1 = new Film("Le iene", "1992", "Quentin Tarantino");
     $dvd2 = new Film("Arancia Meccanica", "1971", "Stanley Kubrick");
     $dvd3 = new Film("Il Padrino", "1972", "Francis Ford Coppola");
     $dvd4 = new Film("Serpico", "1973", "Sidney Lumet");
 
-    $dvd1->presta();
-    
-    echo "   hooo \n\n";
+    $libro1 = new Book("Educazione Siberiana", "2009", "Nicolai Lilin");
+    $libro2 = new Book("Inferno", "2013", "Dan Brown");
+    $libro3 = new Book("Uno nessuno centomila", "1926", "Luigi Pirandello");
+    $libro4 = new Book("Povere creature", "1900", "Alasdair Gray");
 
 
-    var_dump(Biblioteca\MaterialeBibliotecario::getContatoreMateriali());
+   echo "<br>I materiali attualmente in catalogono sono --->" . Film::getContatoreMateriali();
 
-    $dvd1->restituisci();
+   $libro3->presta();
+   echo "<br>I materiali attualmente in catalogono sono --->" . Film::getContatoreMateriali();
 
     ?>
-    <p>Adesso che ho restituito abbiamo: </p>
+
+    <h2 class="m-3">Proviamo Get Instance:</h2>
 
     <?php
 
+    $config = require_once("config.php");
+    require_once("db.php");
 
-    var_dump(Biblioteca\MaterialeBibliotecario::getContatoreMateriali());
+    use db\DB_PDO as Database;
+    use dto\UserDTO as Dto;
 
+    $pdoConn = Database::getInstance($config);
+    $conn = $pdoConn->getConnection();
+    var_dump($conn);
 
+    $id = 0;
+    $name = 'Francesca';
+    $lastname = 'Neri';
+    $city = 'Napoli';
 
+    $userDTO = new Dto($conn);
+    $res = $userDTO->getUserByID(0);
+    //$res = $userDTO->getUserByID(2);
 
+    var_dump($res);
 
-
-
-
-
-
-
-
-
-
+    // if($res) { // Controllo se ci sono dei dati nella variabile $res
+    //     foreach($res as $row) {
+    //         print_r($row);
+    //         echo "ajooo";
+    //     }
+    // }
 
     ?>
+
 
 
 
